@@ -17,13 +17,15 @@ if arg[4] == '-o':
 #保险费比例初始化0
 baoxian_bl = 0.00
 dict1 = {}
-#filename_cfg = 'F:\\work\\python\\shiyanlou-00001\\test.cfg'
-with open(filename_cfg) as file:
-    list_l0 = file.readlines()
-    for list_s0 in list_l0:
-        list_s = list_s0.split('=')
-        dict1[list_s[0].strip()] = float(list_s[1].strip())
-
+#filename_cfg = 'F:\\work\\python\\shiyanlou-00001\\test.cfg'    
+try:
+    with open(filename_cfg) as file:
+        list_l0 = file.readlines()
+        for list_s0 in list_l0:
+            list_s = list_s0.split('=')
+            dict1[list_s[0].strip()] = float(list_s[1].strip())
+except:
+    print("File Error or Format Error")
 #print(dict1)
 #dict1 = {'YangLao':0.08,'YiLiao':0.02,'ShiYe':0.005}
 
@@ -34,12 +36,14 @@ baoxian_bl = dict1['YangLao'] + dict1['YiLiao'] + dict1['ShiYe'] + dict1['GongSh
 
 dict2 = {}
 #filename_user = 'F:\\work\\python\\shiyanlou-00001\\user.csv'
-with open(filename_user) as file:
-    list_l2 = file.readlines()
-    for list_s02 in list_l2:
-        list_s2 = list_s02.split(',')
-        dict2[list_s2[0].strip()] = int(list_s2[1].strip())
-
+try:
+    with open(filename_user) as file:
+        list_l2 = file.readlines()
+        for list_s02 in list_l2:
+            list_s2 = list_s02.split(',')
+            dict2[list_s2[0].strip()] = int(list_s2[1].strip())
+except:
+    print("File Error or Format Error")
 
 #print(dict2)
 
@@ -112,6 +116,9 @@ for key,value in dict2.items() :
 
 #result = ['101,3500,577.50,0.00,2922.50','203,5000,825.00,20.25,4154.75']
 #filename_out = 'F:\\work\\python\\shiyanlou-00001\\gongzi.csv'
-with open(filename_out,'w',newline='') as f:
-    writer = csv.writer(f)
-    writer.writerows(result)
+try:
+    with open(filename_out,'w',newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(result)
+except:
+    print("File Error or Format Error")
