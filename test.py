@@ -32,7 +32,7 @@ print(dict2)
 
 result = ['101,3500,577.50,0.00,2922.50','203,5000,825.00,20.25,4154.75']
 filename_out = 'F:\\work\\python\\shiyanlou-00001\\gongzi.csv'
-with open(filename_out) as f:
+with open(filename_out,'w',newline='') as f:
     writer = csv.writer(f)
     writer.writerow(result)
 
