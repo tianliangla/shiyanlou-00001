@@ -30,6 +30,8 @@ except:
 #dict1 = {'YangLao':0.08,'YiLiao':0.02,'ShiYe':0.005}
 
 #baoxian_bl = 0.08 + 0.02 + 0.005 + 0.00 + 0.00 + 0.06
+jiShuL = dict1['JiShuL']
+jiShuH = dict1['JiShuH']
 baoxian_bl = dict1['YangLao'] + dict1['YiLiao'] + dict1['ShiYe'] + dict1['GongShang'] + dict1['ShengYu'] + dict1['GongJiJin']
 
 #print(format(baoxian_bl,".3f"))
@@ -57,6 +59,11 @@ for key,value in dict2.items() :
         #gongzi = int(sys.argv[1])
         #gongzi = int(value[1])
         gongzi = value
+        gz_baoxian = gongzi
+        if gongzi < jiShuL :
+            gz_baoxian = jiShuL
+        elif gongzi > jiShuH :
+            gz_baoxian = jiShuH
 
     except:
         print("Parameter Error")
@@ -70,7 +77,7 @@ for key,value in dict2.items() :
     #养老保险8%--医疗保险2%--失业保险0.5%--工伤保险0%--生育保险0%--公积金6%
     #baoxian_bl = 0.08 + 0.02 + 0.005 + 0.00 + 0.00 + 0.06
     #baoxian_bl = YangLao + YiLiao + ShiYe + GongShang + ShengYu + GongJiJin
-    baoxian = gongzi * baoxian_bl
+    baoxian = gz_baoxian * baoxian_bl
 
     #起征点初始化为 3500
     qzd = 3500
@@ -87,7 +94,9 @@ for key,value in dict2.items() :
 
 
     #税率值不能直接用百分数，要转成浮点小数才可正常计算
-    if sde <= 1500 :
+    if sde <= 0:
+        yns = 0
+    elif sde <= 1500 :
         yns = sde * 0.03 - 0
     elif sde > 1500 and sde <= 4500:
         yns = sde * 0.1 - 105
